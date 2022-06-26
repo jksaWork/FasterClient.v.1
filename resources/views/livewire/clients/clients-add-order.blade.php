@@ -14,7 +14,7 @@
                     </h4>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="title">{{__('translation.service')}}</label>
                             <select wire:model.defer="service_id" class="select2 servicesSelect form-control "
@@ -27,7 +27,7 @@
                             @error('service_id') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <fieldset class="form-group floating-label-form-group">
                             <label for="email">{{__('translation.order.fees')}}</label>
                             <input  type="text"
@@ -35,7 +35,24 @@
                             @error('order_fees') <span class="text-danger error">{{ $message }}</span>@enderror
                         </fieldset>
                     </div>
+                    <div class='col-md-3'>
+                        <fieldset class="form-group floating-label-form-group">
+                            <label for="email">{{__('translation.number_of_paces')}}</label>
+                            <input type="text" wire:model.defer="number_of_pieces" class="form-control"
+                                placeholder="">
+                            @error('sender_name') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </fieldset>
+                    </div>
+                    <div class='col-md-3'>
+                        <fieldset class="form-group floating-label-form-group">
+                            <label for="email">{{__('translation.order_weight')}}</label>
+                            <input type="text" wire:model.defer="order_weight" class="form-control"
+                                placeholder="">
+                            @error('sender_name') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </fieldset>
+                    </div>
                 </div>
+               
                 <div class="col-md-6 col-sm-12">
                     <h4 class="form-section"><i class="la la-map-marker"></i>
                         {{__('translation.sender.data')}}

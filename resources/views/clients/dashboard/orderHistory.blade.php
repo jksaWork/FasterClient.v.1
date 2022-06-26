@@ -390,6 +390,7 @@
                                         </tr>
                                     </tfoot>
                                 </table>
+                                {{$Orders->links()}}
                                 {{-- <livewire:clients.clients-add-order> --}}
                             </div>
                         </div>

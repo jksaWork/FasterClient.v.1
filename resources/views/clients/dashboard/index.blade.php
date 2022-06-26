@@ -47,7 +47,7 @@
 @endpush
 @section('content')
 <div class="row">
-    <div class="col-xl-4 col-xxl-4 col-sm-12">
+    <div class="col-xl-6 col-xxl-6 col-sm-12">
         <div class="card">
             <figure class="highcharts-figure">
                 <div id="container">
@@ -55,7 +55,7 @@
             </figure>
         </div>
     </div>
-    <div class="col-xl-8 col-xxl-8 col-sm-12">
+    <div class="col-xl-6 col-xxl-6 col-sm-12">
         <div class="row">
             <div class="col-xl-6 col-xxl-6 col-sm-6">
                 <div class="widget-stat card">
@@ -75,12 +75,12 @@
                 <div class="widget-stat card">
                     <div class="card-body">
                         <h4 class="card-title">{{__('translation.inprogress_order')}}</h4>
-                        <h3>{{$order_in_month->where('status' , 'inPorgress')->count()}}</h3>
+                        <h3>{{$order_in_month->where('status' , 'inPorgress')->count() + $order_in_month->where('status' , 'pickup')->count()}}</h3>
                         <div class="progress mb-2">
                             <div class="progress-bar progress-animated bg-warning"
-                                style="width: {{getPrecent($order_in_month, 'inPorgress')}}%"></div>
+                                style="width: {{(getPrecent($order_in_month, 'inPorgress') + getPrecent($order_in_month, 'pickup'))}}%"></div>
                         </div>
-                        <small>{{getPrecent($order_in_month, 'inPorgress') . '%'}}
+                        <small>{{(getPrecent($order_in_month, 'inPorgress') + getPrecent($order_in_month, 'pickup')) . '%'}}
                             {{__('translation.from_count_order_in_this_thirty_day')}}</small>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                 <div class="widget-stat card">
                     <div class="card-body">
                         <h4 class="card-title">{{__('translation.completed_orders')}}</h4>
-                        <h3>{{$order_in_month->where('status' , 'completed')->count()}}</h3>
+                        <h3>{{$order_in_month->where('status' , 'completed')->count() + $order_in_month->where('status' , 'delivered')->count()}}</h3>
                         <div class="progress mb-2">
                             <div class="progress-bar progress-animated bg-red"
                                 style="width: {{getPrecent($order_in_month, 'completed')}}%"></div>
@@ -103,11 +103,11 @@
                 <div class="widget-stat card">
                     <div class="card-body">
                         <h4 class="card-title">{{__('translation.canceled_order')}}</h4>
-                        <h3>25160$</h3>
+                        <h3>{{$order_in_month->where('status' , 'returned')->count()}}</h3>
                         <div class="progress mb-2">
-                            <div class="progress-bar progress-animated bg-success" style="width: 30%"></div>
+                            <div class="progress-bar progress-animated bg-success" style="width: {{getPrecent($order_in_month, 'returned')}}%"></div>
                         </div>
-                        <small>{{__('translation.from_count_order_in_this_thirty_day')}}</small>
+                        <small>{{getPrecent($order_in_month, 'returned') . ' % '}}{{__('translation.from_count_order_in_this_thirty_day')}}</small>
                     </div>
                 </div>
             </div>
@@ -149,6 +149,7 @@
                                 <th scope="col">{{__('translation.receiver.name')}}</th>
                                 <th scope="col">{{__('translation.service')}}</th>
                                 <th scope="col">{{__('translation.date')}}</th>
+                                <th scope="col">{{__('translation.status')}}</th>
                                 <th scope="col">{{__('translation.action')}}</th>
                             </tr>
                         </thead>
@@ -172,18 +173,48 @@
                                 <td>
                                     {{$order->order_date}}
                                 </td>
+                                <td><span class="badge @switch($order->status)
+                                    @case('pending')
+                                        badge-warning
+                                        @break
+                                    @case('pickup')
+                                        badge-secondary
+                                        @break
+                                    @case('inProgress')
+                                        badge-primary
+                                        @break
+                                    @case('delivered')
+                                        badge-info
+                                        @break
+                                    @case('completed')
+                                        badge-success
+                                        @break
+                                        @case('canceled')
+                                        badge-danger
+                                        @break
+                                        @case('returned')
+                                        badge-danger
+                                        @break
+                                    @default
+                                @endswitch ">{{ __('translation.'.$order->status) }}</span>
+                        </td>
                                 <td>
-                                    <div class="dropdown custom-dropdown mb-0 ">
-                                        <div data-toggle="dropdown" aria-expanded="true">
-                                            <i class="fa fa-ellipsis-v"></i>
-                                        </div>
-                                        <div class="dropdown-menu dropdown-menu-right" x-placement="top-end"
-                                            style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-61px, -134px, 0px);">
-                                            <a class="dropdown-item" href="javascript:void(0);">Accept</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">Details</a>
-                                            <a class="dropdown-item text-danger" href="javascript:void(0);">Cancel</a>
-                                        </div>
-                                    </div>
+                                    <a href="{{route('print.invoice', $order->id)}}"
+                                        class="btn btn-sm btn-icon btn-outline-warning"><i
+                                            class="fa fa-print"></i>
+                                    </a>
+                                    <a href='{{route('orders.show.details', $order->id )}}'
+                                            data-backdrop="static" data-keyboard="false"
+                                            wire:click="edit({{ $order->id }})" class="btn btn-sm btn-outline-primary btn-icon
+                                            ">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <button data-toggle="tooltip" data-placement="top"
+                                        data-original-title="{{__('translation.delete')}}"
+                                        wire:click="$emit('triggerOrderDelete', {{$order->id}})"
+                                        class="btn btn-icon btn-outline-danger btn-sm">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
@@ -207,69 +238,41 @@
 
 <script>
     var data = @json($chart);
-console.log(data);
-Highcharts.chart('container', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-    },
-    title: {
-        text: "{{__('translation.order_status_pie_chart')}}"
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    accessibility: {
-        point: {
-            valueSuffix: '%'
-        }
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false
-            },
-            showInLegend: true
-        }
-    },
-    series: [{
-        name: 'Brands',
-        colorByPoint: true,
-        data: [{
-      name: 'Chrome',
-      y: 61.41,
-      sliced: true,
-      selected: true
-    }, {
-      name: 'Internet Explorer',
-      y: 11.84
-    }, {
-      name: 'Firefox',
-      y: 10.85
-    }, {
-      name: 'Edge',
-      y: 4.67
-    }, {
-      name: 'Safari',
-      y: 4.18
-    }, {
-      name: 'Sogou Explorer',
-      y: 1.64
-    }, {
-      name: 'Opera',
-      y: 1.6
-    }, {
-      name: 'QQ',
-      y: 1.2
-    }, {
-      name: 'Other',
-      y: 2.61
-    }], 
-    }]
+    console.log(data);
+    Highcharts.chart('container', {
+  chart: {
+    plotBackgroundColor: null,
+    plotBorderWidth: null,
+    plotShadow: false,
+    type: 'pie', 
+    height:350,
+  },
+  title: {
+    text: "{{__('translation.order_status_pie_chart')}}" 
+  },
+  tooltip: {
+    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+  },
+  accessibility: {
+    point: {
+      valueSuffix: '%'
+    }
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: false
+      },
+      showInLegend: true
+    }
+  },
+  series: [{
+    name: 'Brands',
+    colorByPoint: true,
+    data: data, 
+  }]
 });
 </script>
 
@@ -316,3 +319,4 @@ Highcharts.chart('container', {
         }
     }
 </script>
+@endpush

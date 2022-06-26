@@ -25,6 +25,9 @@ class ClientsAddOrder extends Component
         $sender_sub_area_id, $sender_address,
         $receiver_name, $receiver_phone_no,
         $receiver_area_id, $receiver_sub_area_id,
+        $number_of_pieces,
+        $order_value, 
+        $order_weight , 
         $receiver_address, $police_file, $order_fees, $is_payment_on_delivery, $payment_method = 'balance', $status;
     public $SenderSubArea, $ResevierSubArea, $SendingArea, $ResevingArea;
 
@@ -58,6 +61,9 @@ class ClientsAddOrder extends Component
             'representative_id' => 'nullable|exists:representatives,id',
             'order_fees' => 'numeric|min:0',
             'police_file' => 'nullable|mimes:jpg,jpeg,png,bmp,svg,webp,pdf',
+            'number_of_pieces' => 'required', 
+            'order_weight' => 'required', 
+            'order_value' => 'required', 
         ]);
 
         try {

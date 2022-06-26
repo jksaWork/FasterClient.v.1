@@ -1,7 +1,6 @@
 @extends('layouts.Edum')
 @section('content')
 <div>
-
             <!-- Zero configuration table -->
             <section id="configuration">
                 <div class="row">

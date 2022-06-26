@@ -392,5 +392,13 @@ return [
     'pick_up_order' => 'الطلابات المقبوله',
     'start_date' => 'من التاريخ', 
     'end_date' => 'الي التاريخ', 
+    'number_of_paces' => 'عدد القطع',  
+    'order_weight' => 'وزن الطلب', 
+    'order_id' => 'رقم الطلب' , 
+    'town' => 'المدينه' , 
+    'subareas' => 'المحافظه', 
+    'resevier.data' => 'بيانات المرسل اليه', 
+    'number_of_paces_in_invocie' => 'عدد القطع' , 
+
 
 ];

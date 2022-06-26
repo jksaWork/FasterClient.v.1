@@ -12,7 +12,7 @@
             </a>
             </li>
             <li class="{{ request()->routeIs('addOrder') ? 'mm-active' : '' }}" ><a class="ai-icon" href="{{route('addOrder')}}" aria-expanded="false">
-                <i class="la la-desktop"></i>
+                <i class="la la-plus-circle"></i>
                 <span class="nav-text mx-2">{{__('translation.add.order')}}</span>
             </a>
             </li>

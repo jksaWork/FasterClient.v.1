@@ -39,7 +39,7 @@
 
 @section('content')
 <div class="col-12">
-<div x-data="{miniinvoice : false}" >
+<div x-data="{miniinvoice : true}" >
     <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2">
             <h3 class="content-header-title">{{__('translation.invoices')}}</h3>
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="content-header-right col-md-6 col-12">
-            <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+            {{-- <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
                 <button class="btn btn-info round dropdown-toggle dropdown-menu-right box-shadow-2 px-2"
                     id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false"><i class="ft-settings icon-left"></i>
@@ -60,7 +60,7 @@
                         href="{{route('print.invoice', $order->id)}}">{{__('translation.large.invoice')}}</a>
                     <a @click.prevent="miniinvoice=true" class="dropdown-item"
                         href="component-buttons-extended.html">{{__('translation.mini.invoice')}}</a></div>
-            </div>
+            </div> --}}
         </div>
     </div>
     @foreach ($Orders as $order)
@@ -217,87 +217,105 @@
             </section>
         </template>
         <template x-if="miniinvoice==true">
-            <section class="card m-auto m-2 w-25">
+            <section class="card m-auto  col-md-6 p-2">
                 <div id="invoice-template-small" class="card-body">
                     <!-- Invoice Company Details -->
-                    <div id="invoice-company-details" class="row">
-                        <div class="col-md-12 col-sm-12 text-center">
+                    <div id="invoice-company-details" class="d-flex justify-content-between align-items-center">
+                        
+                        <div class="  text-center">
+                            <h3> الفاتوره</h3>
+                            <h4> {{$OrganizationProfile->name }}</h4>
+                            <h6> {{date('y/m/d')}}</h6>
+                        </div>
+                        <div></div>
+                        <div class="  text-center">
                             <img src="{{asset('uploads/' . $OrganizationProfile->logo)}}" style="width: 125px;"
                                 alt="company logo" class="" />
-                        </div>
-                        <div class="col-md-12 col-sm-12 text-center">
-                            <h2>رقم الفاتوره</h2>
-                            <p class=""># {{$order->invoice_sn}}</p>
                         </div>
                     </div>
                     <!--/ Invoice Company Details -->
                     <!-- Invoice Items Details -->
                     <div id="invoice-items-details" class="">
-                        <div class="row">
-                            <div class=" col-sm-12">
-                                <p class="lead text-center">تفاصيل الطلب</p>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>اسم المستلم</td>
-                                                <td class="text-right">{{$order->receiver_name}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>مدينه المستلم</td>
-                                                <td class="text-right">{{$order->receiverArea->name}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>محافظه المستلم</td>
-                                                <td class="text-right">{{$order->receiverSubArea->name}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>رقم هاتف المستلم</td>
-                                                <td class="text-right">{{$order->receiver_phone_no}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>طريقه الدفع</td>
-                                                <td class="pink text-right">
-                                                    {{__('translation.'.$order->payment_method)}}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>مدفوع</td>
-                                                <td class="text-right">
-                                                    {{$order->payment_method == "on_sending" || $order->payment_method == "balance" ? $order->total_fees : 0}}
-                                                    ر.س</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-bold-800" style="font-weight: bold">الاجمالي</td>
-                                                <td class="text-bold-800 text-right" style="font-weight: bold">
-                                                    {{$order->total_fees}} ر.س</td>
-                                            </tr>
-                                            {{-- <tr>
-                                                <td class="text-center">
-                                                    {!! DNS1D::getBarcodeHTML($order->id, 'CODABAR') !!}
-                                                </td>
-                                                <td class="text-right">
-                                                    BARCODE
-                                                </td>
-
-                                            </tr> --}}
-                                        </tbody>
-                                    </table>
-                                    <div class="text-center">
-                                        <img src="data:image/png;base64,{!! DNS1D::getBarcodePNG($order->id . "", 'C128',3,33,array(1,1,1), true) !!}"
-                                            alt="BARCODE">
-                                        {{-- {!! DNS1D::getBarcodeHTML($order->id . "", 'C128') !!} --}}
-                                    </div>
-                                </div>
-                                {{-- <div class="text-center">
-                                                            <p>Authorized person</p>
-                                                            <img src="../../../app-assets/images/pages/signature-scan.png" alt="signature"
-                                                                class="height-100" />
-                                                            <h6>Amanda Orton</h6>
-                                                            <p class="text-muted">Managing Director</p>
-                                                        </div> --}}
+                        <div class="row justify-content-between p-2" style="border-top:1px solid #000">
+                            <div class="">
+                                <b>{{__('translation.order_id')}}</b> : {{$order->id}}
+                            </div>
+                            <div class="">
+                                <b>{{$order->service->name}}</b>
                             </div>
                         </div>
+                        <div class="row justify-content-between p-2" style="border-top:1px solid #000">
+                            <div class="col-12">
+                                <h3 class="text-center mt-1">
+                                    {{__('translation.sender.data')}}
+                                </h3>
+                            </div>
+                            <div class="d-flex justify-content-between col-12">
+                            <div class=" py-1">
+                                <b>{{__('translation.name')}}</b> : {{$order->sender_name}}
+                            </div>
+                            <div class=" py-1">
+                                <b>{{__('translation.town')}}</b> : {{$order->senderArea->name}}
+                            </div>
+                            </div>
+                            <div class="d-flex justify-content-between col-12">
+                            <div class=" py-1">
+                                <b>{{__('translation.phone')}}</b> : {{ $order->senderSubArea->name }}
+                            </div>
+                            <div class=" py-1">
+                                <b>{{__('translation.subareas')}}</b> : {{ $order->senderSubArea->name }}
+                            </div>
+                            </div>
+                            <div class="col-6 py-1">
+                                <b>{{__('translation.address')}}</b>: {{$order->sender_address}}
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-between p-2" style="border-top:1px solid #000">
+                            <div class="col-12">
+                                <h3 class="text-center mt-1">
+                                    {{__('translation.resevier.data')}}
+                                </h3>
+                            </div>
+                            <div class="d-flex justify-content-between col-12">
+                            <div class=" py-1">
+                                <b>{{__('translation.name')}}</b> : {{$order->receiver_name}}
+                            </div>
+                            <div class=" py-1">
+                                <b>{{__('translation.town')}}</b> : {{$order->receiverArea->name}}
+                            </div>
+                            </div>
+                            <div class="d-flex justify-content-between col-12">
+                            <div class="py-1">
+                                <b>{{__('translation.phone')}}</b> : {{$order->receiver_phone_no}}
+                            </div>
+                            <div class="py-1">
+                                <b>{{__('translation.subareas')}}</b> : {{$order->receiverSubArea->name}}
+                            </div>
+                        </div>
+                            <div class="col-6 py-1">
+                                <b>{{__('translation.address')}}</b>: {{$order->receiver_address}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between p-3" style="border-top:1px solid #000">
+                    <div>
+                        <b>{{__('translation.number_of_paces_in_invocie')}}</b>: {{$order->number_of_pieces}}
+                    </div>
+                    <div>
+                        <b>
+                            {{
+                                __('translation.total.fees')
+                            }}:
+                        </b>
+                        {{$order->total_fees}}
+                    </div>
+                    </div>
+                    <div class="text-center m-1 ">
+                        <img height='50px' src="data:image/png;base64,{!! DNS1D::getBarcodePNG($order->id . "", 'C128',3,33,array(1,1,1), true) !!}"
+                            alt="BARCODE">
+                        {{-- {!! DNS1D::getBarcodeHTML($order->id . "", 'C128') !!} --}}
+                    </div>
                     </div>
                     <!-- Invoice Footer -->
                     {{-- <div id="invoice-footer">
