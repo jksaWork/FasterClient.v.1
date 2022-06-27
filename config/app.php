@@ -137,7 +137,8 @@ return [
     */
 
     'providers' => [
-
+        // JsLocalization\JsLocalizationServiceProvider::class, 
+        
         /*
          * Laravel Framework Service Providers...
          */
@@ -166,6 +167,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
 
         Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
+        // JsLocalization\JsLocalizationServiceProvider::class, 
         /*
          * Package Service Providers...
          */

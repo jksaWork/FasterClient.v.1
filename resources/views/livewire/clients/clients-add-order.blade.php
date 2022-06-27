@@ -10,51 +10,6 @@
                 @endforeach
                 <div class="col-md-6 col-sm-12">
                     <h4 class="form-section"><i class="la la-map-marker"></i>
-                        {{__('translation.service.info')}}
-                    </h4>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="title">{{__('translation.service')}}</label>
-                            <select wire:model.defer="service_id" class="select2 servicesSelect form-control "
-                            style="width:100%">
-                                <option value="">----</option>
-                                @foreach ($services->where('is_active', 1) as $service)
-                                <option value="{{$service->id}}">{{$service->name}}</option>
-                                @endforeach
-                            </select>
-                            @error('service_id') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <fieldset class="form-group floating-label-form-group">
-                            <label for="email">{{__('translation.order.fees')}}</label>
-                            <input  type="text"
-                                wire:model.defer="order_fees" class="form-control" placeholder="">
-                            @error('order_fees') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </fieldset>
-                    </div>
-                    <div class='col-md-3'>
-                        <fieldset class="form-group floating-label-form-group">
-                            <label for="email">{{__('translation.number_of_paces')}}</label>
-                            <input type="text" wire:model.defer="number_of_pieces" class="form-control"
-                                placeholder="">
-                            @error('sender_name') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </fieldset>
-                    </div>
-                    <div class='col-md-3'>
-                        <fieldset class="form-group floating-label-form-group">
-                            <label for="email">{{__('translation.order_weight')}}</label>
-                            <input type="text" wire:model.defer="order_weight" class="form-control"
-                                placeholder="">
-                            @error('sender_name') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </fieldset>
-                    </div>
-                </div>
-               
-                <div class="col-md-6 col-sm-12">
-                    <h4 class="form-section"><i class="la la-map-marker"></i>
                         {{__('translation.sender.data')}}
                     </h4>
                 </div>
@@ -195,7 +150,63 @@
                         </fieldset>
                     </div>
                 </div>
+                <div class="col-md-6 col-sm-12">
+                    <h4 class="form-section"><i class="la la-map-marker"></i>
+                        {{__('translation.service.info')}}
+                    </h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="title">{{__('translation.service')}}</label>
+                            <select wire:model.defer="service_id" class="select2 servicesSelect form-control "
+                            style="width:100%">
+                                <option value="">----</option>
+                                @foreach ($services->where('is_active', 1) as $service)
+                                <option value="{{$service->id}}">{{$service->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('service_id') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <fieldset class="form-group floating-label-form-group">
+                            <label for="email">{{__('translation.order.fees')}}</label>
+                            <input  type="text"
+                                wire:model.defer="order_fees" class="form-control" placeholder="">
+                            @error('order_fees') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6 row">
+
+                        <div class='col-md-4'>
+                            <fieldset class="form-group floating-label-form-group">
+                                <label for="email">{{__('translation.number_of_paces')}}</label>
+                                <input type="text" wire:model.defer="number_of_pieces" class="form-control"
+                                    placeholder="">
+                                @error('number_of_pieces') <span class="text-danger error">{{ $message }}</span>@enderror
+                            </fieldset>
+                        </div>
+                        <div class='col-md-4'>
+                            <fieldset class="form-group floating-label-form-group">
+                                <label for="email">{{__('translation.order_weight')}}</label>
+                                <input type="text" wire:model.defer="order_weight" class="form-control"
+                                    placeholder="">
+                                @error('order_weight') <span class="text-danger error">{{ $message }}</span>@enderror
+                            </fieldset>
+                        </div>
+                        <div class='col-md-4'>
+                            <fieldset class="form-group floating-label-form-group">
+                                <label for="email">{{__('translation.order_value_in_resved')}}</label>
+                                <input type="text" wire:model.defer="order_value" class="form-control"
+                                    placeholder="">
+                                @error('order_value') <span class="text-danger error">{{ $message }}</span>@enderror
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="card-footer">
             <div class="px-2">
                 <input type="reset" class="btn btn-secondary btn-sm btn-lg" data-dismiss="modal"

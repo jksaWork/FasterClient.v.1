@@ -14,8 +14,8 @@
 	<meta name="format-detection" content="telephone=no">
 
 	<!-- FAVICONS ICON -->
-	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+	<link rel="icon" href="{{asset('uploads/logos/ZmlnAW2N0To93TQU4CZNqdPYorkDaVLgCsebsjLj.png')}}" type="image/x-icon" />
+	<link rel="shortcut icon" type="image/x-icon" href="{{asset('uploads/logos/ZmlnAW2N0To93TQU4CZNqdPYorkDaVLgCsebsjLj.png')}}" />
 
 	<!-- PAGE TITLE HERE -->
 	<title> Faster Client - @yield('title' , 'Dashboard')</title>
@@ -131,8 +131,9 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    
+
     @livewireScripts
+
 
     <script src="{{asset('EDUM/vendor/global/global.min.js') }}"></script>
 	<script src="{{asset('EDUM/vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>

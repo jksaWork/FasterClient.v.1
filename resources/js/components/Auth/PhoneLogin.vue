@@ -1,6 +1,6 @@
 <template>
     <div class="card-body p-3">
-            
+
         <form action="/login" id="login-form-with-phone-number" method="post">
          <input name="_token" type="hidden" :value="getCrf" />
                 <input type="hidden" name="access_token" id="access_token" />
@@ -16,9 +16,9 @@
                 <br />
                 <div class="form-control-position">
                     <i class="fa-solid fa-message-smile"></i>
-                </div>            
+                </div>
         </form>
-        <form 
+        <form
             v-if="!confirem_code"
             class="form-horizontal form-simple"
             method="POST"
@@ -36,7 +36,7 @@
                     v-model="form.phone"
                     class="form-control form-control-lg input-lg"
                     id="user-name"
-                    placeholder="Type Your Phone Number"
+                    :placeholder="trans.phone_number_palace_holder"
                 />
                 <br />
                 <div class="form-control-position">
@@ -50,11 +50,11 @@
                 class="btn btn-lg btn-block"
                 style="background: #143b64 !important; color: white"
             >
-            <span> Send Verfication Code</span>
+            <span> {{trans.send_verfiaction_code}}</span>
                 <i clas s="ft-unlock"></i>
             </button>
         </form>
-        <form 
+        <form
             v-if="confirem_code"
             class="form-horizontal form-simple"
             method="POST"
@@ -63,7 +63,8 @@
             @submit.prevent="VerfiactionCode()"
         >
         <div class="text-center text-sm mb-3" style='font-weight:bold;'>
-            We Have Send Verfication Code to You Check Your Inbox
+            <!-- We Have Send Verfication Code to You Check Your Inbox -->
+            {{trans.we_have_send_verfiaction_code}}
         </div>
             <div class="" >
                 <fieldset class="form-group position-relative has-icon-left mb-0">
@@ -76,15 +77,15 @@
                     v-model="form.code"
                     class="form-control form-control-lg input-lg"
                     id="user-name"
-                    placeholder="confirm code"
+                    :placeholder="trans.confrim_code_place_holder"
                 />
                 <a href="#"  @click.prevent=" confirem_code = false">
-                    <span class="mt-5">Resend Code</span>    
+                    <span class="mt-5">{{trans.resend_code}}</span>
                 </a>
-                
+
                 <div class="form-control-position">
                     <i class="fa-solid fa-message-smile"></i>
-                    
+
                 </div>
             </fieldset>
             </div>
@@ -94,13 +95,12 @@
                 </span>
             </div>
             <button
-                
                 type="submit"
                 class="btn btn-lg btn-block"
                 style="background: #143b64 !important; color: white"
             >
                 <span>
-                    Verify Code
+                    {{trans.conforim_code}}
                 </span>
                 <i class="ft-unlock"></i>
             </button>
@@ -114,11 +114,12 @@ export default {
     name: "PhoneLogin",
     data() {
         return {
-            confirem_code : false, 
+            confirem_code : false,
             form: {
-                phone:'', 
-                code : '', 
+                phone:'',
+                code : '',
             },
+            trans: window.lang[window.localStorage.getItem('local') ?? 'ar'],
             error: "",
             // scrf: getCrf(),
         };
@@ -143,10 +144,10 @@ export default {
             // User couldn't sign in (bad verification code?)
             // ...
             });
-        }, 
+        },
         SubmitFormPhoneNumberToServe(){
             document.getElementById('login-form-with-phone-number').submit();
-        }, 
+        },
         SubmitForm() {
             console.log(this.form);
             const auth = getAuth();
@@ -162,13 +163,13 @@ export default {
                 },
                 auth
             );
-            // let phoneNumber = '+249915477450'; 
+            // let phoneNumber = '+249915477450';
             signInWithPhoneNumber(auth, '+249' + this.form.phone, appVerifier)
                 .then((confirmationResult) => {
                     console.log('message sent');
                     console.log(confirmationResult);
                     window.confirmationResult = confirmationResult;
-                    this.confirem_code = true; 
+                    this.confirem_code = true;
                 })
                 .catch((error) => {
                     console.log(error);

@@ -28,6 +28,4 @@ Vue.component('App', require('./components/ExampleComponent.vue').default);
  */
 
 
-// const app = new Vue({
-//     el: '#client',
-// });
+

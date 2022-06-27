@@ -29,7 +29,13 @@
     <script src="{{ asset('practiels/js/app.js') }}"></script>
 
     <!-- stats.js -->
+    <script>
+        window.lang = { ar:'' , en:''}
+        window.lang.en = @json(__('en/translation', [] , '/'));
+        window.lang.ar = @json(__('ar/translation', [] , '/'));
+    </script>
     <script src="{{ asset('practiels/js/lib/stats.js') }}"></script>
+
     <script src="{{ mix('js/app.js') }}"></script>
     <script>
         var count_particles, stats, update;

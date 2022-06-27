@@ -8,21 +8,21 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="">{{__('translation.name')}}</label>
-                    <input type="text" class="form-control" name='fullname' value="{{auth()->user()->fullname}}"
+                    <input type="text" class="form-control" disabled name='fullname' value="{{auth()->user()->fullname}}"
                         id="" aria-describedby="helpId" placeholder="">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="">{{__('translation.address')}}</label>
-                    <input type="text" class="form-control" name='fullname' value="{{auth()->user()->address}}"
+                    <input type="text" class="form-control"  disabled name='fullname' value="{{auth()->user()->address}}"
                         id="" aria-describedby="helpId" placeholder="">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="">{{__('translation.phone')}}</label>
-                    <input type="text" class="form-control" name='fullname' value="{{auth()->user()->phone}}"
+                    <input type="text" class="form-control" disabled name='fullname' value="{{auth()->user()->phone}}"
                         id="" aria-describedby="helpId" placeholder="">
                 </div>
             </div>
@@ -30,21 +30,35 @@
                 <div class="form-group">
                     <label for="">{{__('translation.email')}}</label>
                     <input type="text" class="form-control" name='fullname' value="{{auth()->user()->email}}"
-                        id="" aria-describedby="helpId" placeholder="">
+                        id="" aria-describedby="helpId" disabled placeholder="">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="">{{__('translation.civil_registry')}}</label>
                     <input type="text" class="form-control" name='civil_registry'
-                        value="{{auth()->user()->civil_registry}}" id="" aria-describedby="helpId"
+                        value="{{auth()->user()->civil_registry}}"  disabled id="" aria-describedby="helpId"
                         placeholder="">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="">{{__('translation.activity')}}</label>
-                    <input type="text" class="form-control" name='activity' value="{{auth()->user()->activity}}"
+                    <input type="text" class="form-control" disabled name='activity' value="{{auth()->user()->activity}}"
+                        id="" aria-describedby="helpId" placeholder="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">{{__('translation.bank')}}</label>
+                    <input type="text" class="form-control" disabled name='activity' value="{{auth()->user()->bank}}"
+                        id="" aria-describedby="helpId" placeholder="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">{{__('translation.bank_account_number')}}</label>
+                    <input type="text" class="form-control" disabled name='activity' value="{{auth()->user()->bank_account_number}}"
                         id="" aria-describedby="helpId" placeholder="">
                 </div>
             </div>

@@ -10,10 +10,10 @@
                             <div class="col-6 text-center p-1 " @click="cureent_page = 'phone_number'" >
                                 <h4 :class="' normal-head ' + (cureent_page == 'phone_number' ? 'active' :'')">
                                     <!-- {{getActiveClass() }} -->
-                                    Phone Numbers</h4>
+                                    {{ trans.phone}}</h4>
                             </div>
                             <div class="col-6 text-center p-1" @click="cureent_page = 'email'">
-                                <h4 :class=" 'normal-head ' +  (cureent_page == 'email' ? 'active' :'') ">Email</h4>
+                                <h4 :class=" 'normal-head ' +  (cureent_page == 'email' ? 'active' :'') ">{{trans.email}}</h4>
                             </div>
                         </div>
                         <EmialLogin v-if='cureent_page == "email"'/>
@@ -30,6 +30,7 @@
         background: #143b64;
         border-radius: 20px;
         color: #fff;
+
     }
     .normal-head{
         padding: 10px;
@@ -43,14 +44,18 @@ export default {
     name: "login-container",
     components: { EmialLogin, PhoneLogin },
     data:()=>({
-        cureent_page:'email', 
-    }), 
+        cureent_page:'email',
+        trans: window.lang[window.localStorage.getItem('local') ?? 'ar'],
+    }),
+    created(){
+        console.log(this.trans);
+    },
     methods:{
-        
-    }, 
+
+    },
     component:{
-        getActiveClass: () => cureent_page == 'phone_number' ? 'active' : '' , 
-        
+        getActiveClass: () => cureent_page == 'phone_number' ? 'active' : '' ,
+
     }
 };
 </script>

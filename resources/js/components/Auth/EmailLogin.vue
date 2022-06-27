@@ -18,7 +18,7 @@
                     @change="CheckEmail"
                     class="form-control form-control-lg input-lg"
                     id="user-name"
-                    placeholder="type your email"
+                    placeholder="email@example.com"
                 />
                 <div class="form-control-position">
                     <i class="ft-user"></i>
@@ -48,8 +48,12 @@
                 class="btn btn-lg btn-block"
                 style="background: #143b64 !important; color: white"
             >
-                Login 
+                <span class="">
                 <i class="ft-unlock"></i>
+                <span class="mx-2">
+                        {{trans.login}}
+                    </span>
+                </span>
             </button>
         </form>
     </div>
@@ -67,8 +71,13 @@ export default {
                 // access_token: '',
             },
             error: "",
+                trans: window.lang[window.localStorage.getItem('local') ?? 'ar'],
+
             // scrf: getCrf(),
         };
+    },
+    created(){
+        console.log(this.trans.login);
     },
     computed: {
         getCrf() {

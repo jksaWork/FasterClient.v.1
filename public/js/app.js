@@ -16991,20 +16991,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 // import {Auth} from 'firebase/auth';
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "EmailLogin",
   data: function data() {
+    var _window$localStorage$;
+
     return {
       form: {
         email: "",
         password: "" // access_token: '',
 
       },
-      error: "" // scrf: getCrf(),
+      error: "",
+      trans: window.lang[(_window$localStorage$ = window.localStorage.getItem('local')) !== null && _window$localStorage$ !== void 0 ? _window$localStorage$ : 'ar'] // scrf: getCrf(),
 
     };
+  },
+  created: function created() {
+    console.log(this.trans.login);
   },
   computed: {
     getCrf: function getCrf() {
@@ -17183,12 +17193,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PhoneLogin",
   data: function data() {
+    var _window$localStorage$;
+
     return {
       confirem_code: false,
       form: {
         phone: '',
         code: ''
       },
+      trans: window.lang[(_window$localStorage$ = window.localStorage.getItem('local')) !== null && _window$localStorage$ !== void 0 ? _window$localStorage$ : 'ar'],
       error: "" // scrf: getCrf(),
 
     };
@@ -17229,7 +17242,7 @@ __webpack_require__.r(__webpack_exports__);
         callback: function callback(response) {
           onSignInSubmit();
         }
-      }, auth); // let phoneNumber = '+249915477450'; 
+      }, auth); // let phoneNumber = '+249915477450';
 
       (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signInWithPhoneNumber)(auth, '+249' + this.form.phone, appVerifier).then(function (confirmationResult) {
         console.log('message sent');
@@ -17329,6 +17342,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -17338,9 +17352,15 @@ __webpack_require__.r(__webpack_exports__);
     PhoneLogin: _Auth_PhoneLogin_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
   data: function data() {
+    var _window$localStorage$;
+
     return {
-      cureent_page: 'email'
+      cureent_page: 'email',
+      trans: window.lang[(_window$localStorage$ = window.localStorage.getItem('local')) !== null && _window$localStorage$ !== void 0 ? _window$localStorage$ : 'ar']
     };
+  },
+  created: function created() {
+    console.log(this.trans);
   },
   methods: {},
   component: {
@@ -17416,9 +17436,6 @@ Vue.component('App', __webpack_require__(/*! ./components/ExampleComponent.vue *
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-// const app = new Vue({
-//     el: '#client',
-// });
 
 /***/ }),
 
@@ -17467,18 +17484,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_loginWithFirebase_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/loginWithFirebase.vue */ "./resources/js/components/loginWithFirebase.vue");
+// import Vue, { createApp } from 'vue'
+// import { i18nVue } from 'laravel-vue-i18n'
+// import i18n from "i18n";
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
 
 __webpack_require__(/*! ./Firebase */ "./resources/js/Firebase.js");
 
 
-Vue.component('App', __webpack_require__(/*! ./components/loginWithFirebase.vue */ "./resources/js/components/loginWithFirebase.vue").default); // import Notifications from 'vue-notification'
-// import Snackbar from 'vuejs-snackbar';
-// Global register
-// Vue.component('snackbar', Snackbar);
-// Vue.use(Notifications);
-
+Vue.component('App', __webpack_require__(/*! ./components/loginWithFirebase.vue */ "./resources/js/components/loginWithFirebase.vue").default);
 var app2 = new Vue({
+  // resolve: lang => import(`../../lang/${lang}.json`),
+  // i18n,
   el: '#login-container',
   render: function render(h) {
     return h(_components_loginWithFirebase_vue__WEBPACK_IMPORTED_MODULE_0__.default);
@@ -41166,7 +41183,7 @@ var render = function () {
                 name: "email",
                 type: "text",
                 id: "user-name",
-                placeholder: "type your email",
+                placeholder: "email@example.com",
               },
               domProps: { value: _vm.form.email },
               on: {
@@ -41230,7 +41247,27 @@ var render = function () {
             : _vm._e(),
         ]),
         _vm._v(" "),
-        _vm._m(2),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-lg btn-block",
+            staticStyle: { background: "#143b64 !important", color: "white" },
+            attrs: { type: "submit" },
+          },
+          [
+            _c("span", {}, [
+              _c("i", { staticClass: "ft-unlock" }),
+              _vm._v(" "),
+              _c("span", { staticClass: "mx-2" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.trans.login) +
+                    "\n                "
+                ),
+              ]),
+            ]),
+          ]
+        ),
       ]
     ),
   ])
@@ -41251,23 +41288,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "form-control-position" }, [
       _c("i", { staticClass: "la la-key" }),
     ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-lg btn-block",
-        staticStyle: { background: "#143b64 !important", color: "white" },
-        attrs: { type: "submit" },
-      },
-      [
-        _vm._v("\n            Login \n            "),
-        _c("i", { staticClass: "ft-unlock" }),
-      ]
-    )
   },
 ]
 render._withStripped = true
@@ -41385,7 +41405,7 @@ var render = function () {
                       name: "phone",
                       type: "text",
                       id: "user-name",
-                      placeholder: "Type Your Phone Number",
+                      placeholder: _vm.trans.phone_number_palace_holder,
                     },
                     domProps: { value: _vm.form.phone },
                     on: {
@@ -41405,7 +41425,24 @@ var render = function () {
               ),
             ]),
             _vm._v(" "),
-            _vm._m(2),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-lg btn-block",
+                staticStyle: {
+                  background: "#143b64 !important",
+                  color: "white",
+                },
+                attrs: { id: "phone-number-submit", type: "submit" },
+              },
+              [
+                _c("span", [
+                  _vm._v(" " + _vm._s(_vm.trans.send_verfiaction_code)),
+                ]),
+                _vm._v(" "),
+                _c("i", { attrs: { clas: "", s: "ft-unlock" } }),
+              ]
+            ),
           ]
         )
       : _vm._e(),
@@ -41436,7 +41473,9 @@ var render = function () {
               },
               [
                 _vm._v(
-                  "\n        We Have Send Verfication Code to You Check Your Inbox\n    "
+                  "\n        " +
+                    _vm._s(_vm.trans.we_have_send_verfiaction_code) +
+                    "\n    "
                 ),
               ]
             ),
@@ -41484,7 +41523,7 @@ var render = function () {
                       name: "email",
                       type: "text",
                       id: "user-name",
-                      placeholder: "confirm code",
+                      placeholder: _vm.trans.confrim_code_place_holder,
                     },
                     domProps: { value: _vm.form.code },
                     on: {
@@ -41510,12 +41549,12 @@ var render = function () {
                     },
                     [
                       _c("span", { staticClass: "mt-5" }, [
-                        _vm._v("Resend Code"),
+                        _vm._v(_vm._s(_vm.trans.resend_code)),
                       ]),
                     ]
                   ),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _vm._m(2),
                 ]
               ),
             ]),
@@ -41532,7 +41571,28 @@ var render = function () {
                 : _vm._e(),
             ]),
             _vm._v(" "),
-            _vm._m(4),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-lg btn-block",
+                staticStyle: {
+                  background: "#143b64 !important",
+                  color: "white",
+                },
+                attrs: { type: "submit" },
+              },
+              [
+                _c("span", [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.trans.conforim_code) +
+                      "\n            "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("i", { staticClass: "ft-unlock" }),
+              ]
+            ),
           ]
         )
       : _vm._e(),
@@ -41559,45 +41619,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-lg btn-block",
-        staticStyle: { background: "#143b64 !important", color: "white" },
-        attrs: { id: "phone-number-submit", type: "submit" },
-      },
-      [
-        _c("span", [_vm._v(" Send Verfication Code")]),
-        _vm._v(" "),
-        _c("i", { attrs: { clas: "", s: "ft-unlock" } }),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-control-position" }, [
       _c("i", { staticClass: "fa-solid fa-message-smile" }),
     ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-lg btn-block",
-        staticStyle: { background: "#143b64 !important", color: "white" },
-        attrs: { type: "submit" },
-      },
-      [
-        _c("span", [_vm._v("\n                Verify Code\n            ")]),
-        _vm._v(" "),
-        _c("i", { staticClass: "ft-unlock" }),
-      ]
-    )
   },
 ]
 render._withStripped = true
@@ -41714,7 +41738,8 @@ var render = function () {
                               },
                               [
                                 _vm._v(
-                                  "\n                                    Phone Numbers"
+                                  "\n                                    " +
+                                    _vm._s(_vm.trans.phone)
                                 ),
                               ]
                             ),
@@ -41739,7 +41764,7 @@ var render = function () {
                                   "normal-head " +
                                   (_vm.cureent_page == "email" ? "active" : ""),
                               },
-                              [_vm._v("Email")]
+                              [_vm._v(_vm._s(_vm.trans.email))]
                             ),
                           ]
                         ),

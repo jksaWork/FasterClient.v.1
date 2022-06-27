@@ -31,8 +31,8 @@ class ClientDashboradController extends Controller
     }
 
     public function OrderHistory(){
-        $Orders = Order::where('client_id' , auth()->user()->id)->paginate(10);
-        return view('clients.dashboard.orderHistory' , compact('Orders'));
+        $Order = Order::where('client_id' , auth()->user()->id)->paginate(10);
+        return view('clients.dashboard.orderHistory' , compact('Order'));
     }
 
     public function profile(){
