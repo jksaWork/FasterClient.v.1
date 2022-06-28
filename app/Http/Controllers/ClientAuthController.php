@@ -13,7 +13,6 @@ class ClientAuthController extends Controller
 {
     use LoginWithToken;
     public function Login(Request $request){
-        
         $LoginKey = $this->getPhoneNumberFromApiToken($request->access_token, $request->login_type);
         // dd($LoginKey);
         if ($request->login_type == 'phoneNumber') {
@@ -21,10 +20,12 @@ class ClientAuthController extends Controller
         }else {
             $client = Client::withoutGlobalScope(new ApprovedScope)->where('email', $LoginKey)->first();
         }
+
         // $client = Client::firstWhere('email' , $request->email);
         // dd();
         // dd($client);
         if(empty($client)){
+            notify()->error('invalid Credinatilas');
             return redirect()->back()->withErors('invalid Credinatilas');
         }
 
@@ -35,7 +36,7 @@ class ClientAuthController extends Controller
         // dd('jksa altigani');
         // dd(auth()->user());
 
-        // notify()->error('The provided credentials do not match our records.');
+        notify()->error('The provided credentials do not match our records.');
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',

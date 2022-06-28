@@ -61,6 +61,7 @@
     @stack('links')
 
     @livewireStyles
+    @notifyCss
 
 </head>
 
@@ -71,9 +72,11 @@
 
     <div class="app-content content">
         @yield('content')
+        <x:notify-messages />
     </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     <!-- BEGIN VENDOR JS-->
+    @notifyJs
     @yield('scripts')
     <script src="{{asset('app-assets/vendors/js/vendors.min.js')}}" type="text/javascript"></script>
     <!-- BEGIN VENDOR JS-->

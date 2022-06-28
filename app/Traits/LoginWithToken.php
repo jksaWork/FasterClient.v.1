@@ -19,7 +19,7 @@ trait LoginWithToken{
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
     // dd($JsonData);
-    $Url = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCW_wO9dXzW6ptdEipsMiK-Iq4KInZHb3Y';
+    $Url = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBESuOeNOevWXRZbIRajR-vWwNMNRjPBiY';
     curl_setopt($ch, CURLOPT_URL, $Url);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $JsonData);

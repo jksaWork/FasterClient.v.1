@@ -72,7 +72,6 @@ export default {
             },
             error: "",
                 trans: window.lang[window.localStorage.getItem('local') ?? 'ar'],
-
             // scrf: getCrf(),
         };
     },
