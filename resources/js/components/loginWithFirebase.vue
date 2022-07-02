@@ -7,7 +7,7 @@
                 <div class="card border-grey border-lighten-3 m-0">
                     <div class="card-content">
                         <div class="d-flex align-items-center justify-content-center py-2">
-                            <img :src='img' alt="notfond" />
+                            <img src='https://client.faster.gulfsmo.net/uploads/logos/ZmlnAW2N0To93TQU4CZNqdPYorkDaVLgCsebsjLj.png' width="120"  alt="notfond" />
                         </div>
                         <div class="row px-2" style="margin:0 2px">
                             <div class="col-6 text-center p-1 " @click="cureent_page = 'phone_number'" >
@@ -47,7 +47,7 @@ export default {
     components: { EmialLogin, PhoneLogin },
     data:()=>({
         cureent_page:'email',
-        img: require("../assets/logo.png"),
+        img: "http://localhost:8000/uploads/logos/ZmlnAW2N0To93TQU4CZNqdPYorkDaVLgCsebsjLj.png",
         trans: window.lang[window.localStorage.getItem('local') ?? 'ar'],
     }),
     created(){

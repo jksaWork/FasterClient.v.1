@@ -17358,7 +17358,7 @@ __webpack_require__.r(__webpack_exports__);
 
     return {
       cureent_page: 'email',
-      img: __webpack_require__(/*! ../assets/logo.png */ "./resources/js/assets/logo.png"),
+      img: "http://localhost:8000/uploads/logos/ZmlnAW2N0To93TQU4CZNqdPYorkDaVLgCsebsjLj.png",
       trans: window.lang[(_window$localStorage$ = window.localStorage.getItem('local')) !== null && _window$localStorage$ !== void 0 ? _window$localStorage$ : 'ar']
     };
   },
@@ -22630,16 +22630,6 @@ module.exports = function (cssWithMappingToString) {
 
   return list;
 };
-
-/***/ }),
-
-/***/ "./resources/js/assets/logo.png":
-/*!**************************************!*\
-  !*** ./resources/js/assets/logo.png ***!
-  \**************************************/
-/***/ ((module) => {
-
-module.exports = "/images/logo.png?f225e5963e1a163603f4597f6da6a3db";
 
 /***/ }),
 
@@ -41724,14 +41714,7 @@ var render = function () {
                   "div",
                   { staticClass: "card-content" },
                   [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "d-flex align-items-center justify-content-center py-2",
-                      },
-                      [_c("img", { attrs: { src: _vm.img, alt: "notfond" } })]
-                    ),
+                    _vm._m(0),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -41809,7 +41792,26 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "d-flex align-items-center justify-content-center py-2" },
+      [
+        _c("img", {
+          attrs: {
+            src: "https://client.faster.gulfsmo.net/uploads/logos/ZmlnAW2N0To93TQU4CZNqdPYorkDaVLgCsebsjLj.png",
+            width: "120",
+            alt: "notfond",
+          },
+        }),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 
