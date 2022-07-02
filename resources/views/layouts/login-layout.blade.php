@@ -62,6 +62,9 @@
         *{
             font-family: 'Cairo', sans-serif;
         }
+        body{
+            overflow: hidden;
+        }
         </style>
 
     @stack('links')
