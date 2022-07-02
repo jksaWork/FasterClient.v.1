@@ -7,9 +7,9 @@
                 <div class="card border-grey border-lighten-3 m-0">
                     <div class="card-content">
                         <div class="d-flex align-items-center justify-content-center py-2">
-                            <img :src='require("../assets/logo.png")' alt="notfond" />
+                            <img :src='img' alt="notfond" />
                         </div>
-                        <div class="row px-3" style="margin:0 2px">
+                        <div class="row px-2" style="margin:0 2px">
                             <div class="col-6 text-center p-1 " @click="cureent_page = 'phone_number'" >
                                 <h4 :class="' normal-head ' + (cureent_page == 'phone_number' ? 'active' :'')">
                                     {{ trans.phone }}</h4>
@@ -47,6 +47,7 @@ export default {
     components: { EmialLogin, PhoneLogin },
     data:()=>({
         cureent_page:'email',
+        img: require("../assets/logo.png"),
         trans: window.lang[window.localStorage.getItem('local') ?? 'ar'],
     }),
     created(){
