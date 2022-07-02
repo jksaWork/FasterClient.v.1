@@ -30,6 +30,7 @@
                             <h5 class="mx-2">{{__('translation.orders')}}</h5>
                         </div>
                     </div>
+                    <div class="table-responsive">
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -90,6 +91,7 @@
                     </table>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </div>

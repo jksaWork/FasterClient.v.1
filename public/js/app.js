@@ -17343,6 +17343,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -22627,6 +22629,16 @@ module.exports = function (cssWithMappingToString) {
 
   return list;
 };
+
+/***/ }),
+
+/***/ "./resources/js/assets/logo.png":
+/*!**************************************!*\
+  !*** ./resources/js/assets/logo.png ***!
+  \**************************************/
+/***/ ((module) => {
+
+module.exports = "/images/logo.png?f225e5963e1a163603f4597f6da6a3db";
 
 /***/ }),
 
@@ -41133,7 +41145,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card-body p-3" }, [
+  return _c("div", { staticClass: "card-body py-1" }, [
     _c(
       "form",
       {
@@ -41311,7 +41323,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card-body p-3" }, [
+  return _c("div", { staticClass: "card-body py-1" }, [
     _c(
       "form",
       {
@@ -41573,7 +41585,7 @@ var render = function () {
             _c(
               "button",
               {
-                staticClass: "btn btn-lg btn-block",
+                staticClass: "btn btn-lg btn-block mb-3",
                 staticStyle: {
                   background: "#143b64 !important",
                   color: "white",
@@ -41713,7 +41725,26 @@ var render = function () {
                   [
                     _c(
                       "div",
-                      { staticClass: "row ", staticStyle: { margin: "0 2px" } },
+                      {
+                        staticClass:
+                          "d-flex align-items-center justify-content-center py-2",
+                      },
+                      [
+                        _c("img", {
+                          attrs: {
+                            src: __webpack_require__(/*! ../assets/logo.png */ "./resources/js/assets/logo.png"),
+                            alt: "notfond",
+                          },
+                        }),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "row px-3",
+                        staticStyle: { margin: "0 2px" },
+                      },
                       [
                         _c(
                           "div",

@@ -6,11 +6,13 @@
             <div class="col-md-4 col-10 box-shadow-2 p-0">
                 <div class="card border-grey border-lighten-3 m-0">
                     <div class="card-content">
-                        <div class="row " style="margin:0 2px">
+                        <div class="d-flex align-items-center justify-content-center py-2">
+                            <img :src='require("../assets/logo.png")' alt="notfond" />
+                        </div>
+                        <div class="row px-3" style="margin:0 2px">
                             <div class="col-6 text-center p-1 " @click="cureent_page = 'phone_number'" >
                                 <h4 :class="' normal-head ' + (cureent_page == 'phone_number' ? 'active' :'')">
-                                    <!-- {{getActiveClass() }} -->
-                                    {{ trans.phone}}</h4>
+                                    {{ trans.phone }}</h4>
                             </div>
                             <div class="col-6 text-center p-1" @click="cureent_page = 'email'">
                                 <h4 :class=" 'normal-head ' +  (cureent_page == 'email' ? 'active' :'') ">{{trans.email}}</h4>
@@ -55,7 +57,6 @@ export default {
     },
     component:{
         getActiveClass: () => cureent_page == 'phone_number' ? 'active' : '' ,
-
     }
 };
 </script>

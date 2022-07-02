@@ -1,5 +1,5 @@
 <template>
-    <div class="card-body p-3">
+    <div class="card-body py-1">
 
         <form action="/login" id="login-form-with-phone-number" method="post">
          <input name="_token" type="hidden" :value="getCrf" />
@@ -85,8 +85,8 @@
 
                 <div class="form-control-position">
                     <i class="fa-solid fa-message-smile"></i>
-
                 </div>
+
             </fieldset>
             </div>
             <div class="form-group">
@@ -96,7 +96,7 @@
             </div>
             <button
                 type="submit"
-                class="btn btn-lg btn-block"
+                class="btn btn-lg btn-block mb-3"
                 style="background: #143b64 !important; color: white"
             >
                 <span>

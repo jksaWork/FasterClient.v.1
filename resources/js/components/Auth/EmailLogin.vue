@@ -1,5 +1,5 @@
 <template>
-    <div class="card-body p-3">
+    <div class="card-body py-1">
         <form
             class="form-horizontal form-simple"
             method="POST"

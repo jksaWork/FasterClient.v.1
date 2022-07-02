@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Order;
 use App\Models\orderTracking;
 use Livewire\Component;
 
@@ -13,8 +14,11 @@ class OrderTraker extends Component
         $this->traker = orderTracking::where('id' , null)->get();
     }
     public function AddIdToIds(){
-        $this->traker = orderTracking::where('order_id' , $this->AddedID)->get();
-        // dd($this->traker);
+        // if()
+        $order = Order::where(['client_id' => 'client_id' , 'id' => $this->AddedID])->get();
+
+        if($order)$this->traker = orderTracking::where('order_id' , $this->AddedID)->get();
+        else $this->traker = orderTracking::where('id' , null)->get();// dd($this->traker);
     }
     public function render()
     {

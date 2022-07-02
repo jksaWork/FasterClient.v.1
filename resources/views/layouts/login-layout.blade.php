@@ -57,6 +57,12 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <!-- END Custom CSS-->
     @endif
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+        *{
+            font-family: 'Cairo', sans-serif;
+        }
+        </style>
 
     @stack('links')
 
