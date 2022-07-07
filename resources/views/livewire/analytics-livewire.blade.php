@@ -195,6 +195,7 @@
     const   data1 = @json($DailyOrders);
     LineOrder(data1);
         function LineOrder(data1){
+        try{
             console.log(data1);
             const labels = data1.map(item => item.label);
             const CartData = {
@@ -220,6 +221,9 @@
                 config
                 );
                 window.myChart = myChart;
+        }catch(e){
+
+        }
         }
 </script>
 <script>
@@ -229,6 +233,9 @@
 function PieChart(data){
 
 console.log(data);
+try{
+
+
 Highcharts.chart('container', {
     chart: {
         plotBackgroundColor: null,
@@ -263,51 +270,57 @@ Highcharts.chart('container', {
         data: data
     }]
 });
+}catch (e){
+console.log(e);
+}
 }
 
 // lines chart
-areaJson  = @json($areaChart);
-area = @json($area);
-console.log(areaJson);
-console.log(area);
-LinesCharts(areaJson);
 
-function LinesCharts(areaJson){
-console.log(areaJson);
-// labales = object.Keys(areaJson);
-labales = Object.keys(areaJson);
-console.log
-console.log(labales);
-let series = [];
-area.forEach(element => {
- let   areaJsonMapReuslt = Object.values(areaJson).map(function(innerarray){
-        // console.log(innerarray , 'innerarray            ---------------');
-        let inArrayMapResult;
-        for (let index = 0; index < area.length; index++) {
-            try {
-            const ele = innerarray[index];
-            if(index == 1){
-                console.log(ele , 'element of array -------------------');
-            }
-                inArrayMapResultitem = ele.sendid == element.id ? ele.c : 0;
-                inArrayMapResult = inArrayMapResultitem;
-            } catch (error) {
-                // inArrayMapResult.push(0);
-            }
-        }
-        return inArrayMapResult;
+</script>
+<script>
+    document.addEventListener('livewire:load', function () {
+        Livewire.on('updatedCharts', function(val , val2){
+            console.log(val, val2);
+            window.myChart?.destroy();
+            PieChart(val2);
+            LineOrder(val);
+            LinesCharts(areaJson);
+        });
     });
-    console.log(areaJsonMapReuslt , 'area_json_map_resutl');
-    const sericechild =   {
-        'data' : areaJsonMapReuslt,
-        'name' : element.name,
-    }
-    series.push(sericechild);
-    // console.log(sericechild);
-});
-console.log(series , 'sercie -------------------------------------------------');
+</script>
+<script class="last-script">
+    areaJson  = @json($areaChart);
+area = @json($area);
 
-// console.log(labales ,  '======================')
+getCountFromData('May', 1);
+function getCountFromData(month, id){
+    let [c] = areaJson[month].filter(el => el.sendid == id).map(el => el.c);
+    return c;
+}
+
+LinesCharts(areaJson);
+function LinesCharts(areaJson){
+
+    let OuterMapResult =  area.map(function(el){
+
+let initDataArray =  Object.entries(areaJson).map(function(innerarray, i){
+    // console.log(el ,  '------------------------------insde map --------------' );
+    // console.log(monthname, el.id);
+    let monthname  = innerarray[0];
+    let data = getCountFromData(monthname, el.id);
+    return (typeof  data ==  'undefined') ?  0 : data;
+})
+// console.log(initDataArray ,  ' ------------ inside --------------')
+const sericeChild = {
+    "name" : el.name,
+    'data': initDataArray,
+}
+return sericeChild;
+});
+console.log(areaJson);
+labales = Object.keys(areaJson);
+
 series2 = [{
     name: 'Tokyo',
     data: [49.9]
@@ -333,13 +346,13 @@ Highcharts.chart('container-lines', {
   yAxis: {
     min: 0,
     title: {
-      text: 'Rainfall (mm)'
+      text: 'Rainfall ()'
     }
   },
   tooltip: {
     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-      '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+      '<td style="padding:0"><b>{point.y}</b></td></tr>',
     footerFormat: '</table>',
     shared: true,
     useHTML: true
@@ -350,22 +363,9 @@ Highcharts.chart('container-lines', {
       borderWidth: 0
     }
   },
-  series: series,
+  series: OuterMapResult,
 });
 }
 
-</script>
-<script>
-    document.addEventListener('livewire:load', function () {
-        Livewire.on('updatedCharts', function(val , val2){
-            // alert('jksaaltigani');
-            console.log(val, val2);
-            window.myChart?.destroy();
-            PieChart(val2);
-            // console.log(val, val2);
-            LineOrder(val);
-            LinesCharts();
-        });
-    });
 </script>
 @endpush
