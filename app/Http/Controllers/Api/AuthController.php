@@ -172,7 +172,7 @@ class AuthController extends Controller
     public function RepresentativeRegister(Request $request){
         try{
             $DriverFiles = ['driving_license' , 'identify_image', 'form_image'];
-            $Validator = validator($request->all() , [
+            $Validator = validator($request->all(), [
                 'fullname' => 'required|string',
                 'email' => 'sometimes|email|unique:representatives,email',
                 'phone' => 'required|unique:representatives,phone',
@@ -184,7 +184,6 @@ class AuthController extends Controller
                 'driving_license' => 'required',
                 'identify_image' => 'required',
                 'form_image' => 'required',
-                // ''
                 ]);
                 if($Validator->fails()) return $Validator->errors();
                 $email  = $request->email ?? ' ';

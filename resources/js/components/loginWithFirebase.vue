@@ -6,7 +6,7 @@
             <div class="col-md-4 col-10 box-shadow-2 p-0">
                 <div class="card border-grey border-lighten-3 m-0">
                     <div class="card-content">
-                        <div class="d-flex align-items-center justify-content-center py-2">
+                        <div class="d-flex align-items-center justify-content-center pt-2">
                             <img src='https://client.faster.gulfsmo.net/uploads/logos/ZmlnAW2N0To93TQU4CZNqdPYorkDaVLgCsebsjLj.png' width="120"  alt="notfond" />
                         </div>
                         <div class="row px-2" style="margin:0 2px">

@@ -82,10 +82,8 @@
                                     <button type="button" wire:click.prevent="cancel()"
                                         class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
-
                                     </button>
                                 </div>
-
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -94,12 +92,10 @@
                                                 {{__('translation.service.info')}}
                                             </h4>
                                         </div>
-
                                         <div class="col-md-6">
                                             <div class="row">
                                                 <div class="col-4">
                                                     <b>{{__('translation.service')}} : </b>
-
                                                 </div>
                                                 <div class="col-8">
                                                     {{$order->service->name}}

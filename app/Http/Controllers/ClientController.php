@@ -392,7 +392,6 @@ class ClientController extends Controller
     {
         try {
             $services = Service::with('notes')->get();
-
             return response([
                 "r" => $request,
                 "status" => true,
@@ -412,7 +411,6 @@ class ClientController extends Controller
             $areas = Area::with('subAreas')->get();
 
             return response([
-
                 "status" => true,
                 "data" => $areas
             ]);

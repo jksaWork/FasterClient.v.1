@@ -121,18 +121,58 @@
         </div>
     </div>
     <div class="row">
-        
+
         <div class="col-xl-6 col-xxl-6 col-sm-12">
             <div class="card">
+                @if(count($orders) > 0)
                 <figure class="highcharts-figure">
                     <div id="container">
                     </div>
                 </figure>
+                @else
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class='text-center'>
+                        <span class="mb-5">
+                            <svg style="width:40px;height:40px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M5 5H7V11H5V5M10 5H8V11H10V5M5 19H7V13H5V19M10 13H8V19H10V17H15V15H10V13M2 21H4V3H2V21M20 3V7H13V5H11V11H13V9H20V15H18V13H16V19H18V17H20V21H22V3H20Z" />
+                            </svg>
+                        </span>
+                        <div>
+                            <h3>
+                                {{__('translation.no_chart_Data_right_now')}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+
             </div>
         </div>
         <div class="col-md-6">
             <div class="card p-3">
+                @if(count($DailyOrders) > 0)
                 <canvas id="myChart" width="600" height="400"></canvas>
+                @else
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class='text-center'>
+                        <span class="mb-5">
+                            <svg style="width:40px;height:40px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M5 5H7V11H5V5M10 5H8V11H10V5M5 19H7V13H5V19M10 13H8V19H10V17H15V15H10V13M2 21H4V3H2V21M20 3V7H13V5H11V11H13V9H20V15H18V13H16V19H18V17H20V21H22V3H20Z" />
+                            </svg>
+                        </span>
+                        <div>
+                            <h3>
+                                {{__('translation.no_chart_Data_right_now')}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+
             </div>
         </div>
         <div class="col-xl-12">
@@ -187,7 +227,7 @@
 
     PieChart(data);
 function PieChart(data){
-    
+
 console.log(data);
 Highcharts.chart('container', {
     chart: {
@@ -225,9 +265,57 @@ Highcharts.chart('container', {
 });
 }
 
-// lines chart 
-function LinesCharts(){
-    
+// lines chart
+areaJson  = @json($areaChart);
+area = @json($area);
+console.log(areaJson);
+console.log(area);
+LinesCharts(areaJson);
+
+function LinesCharts(areaJson){
+console.log(areaJson);
+// labales = object.Keys(areaJson);
+labales = Object.keys(areaJson);
+console.log
+console.log(labales);
+let series = [];
+area.forEach(element => {
+ let   areaJsonMapReuslt = Object.values(areaJson).map(function(innerarray){
+        // console.log(innerarray , 'innerarray            ---------------');
+        let inArrayMapResult;
+        for (let index = 0; index < area.length; index++) {
+            try {
+            const ele = innerarray[index];
+            if(index == 1){
+                console.log(ele , 'element of array -------------------');
+            }
+                inArrayMapResultitem = ele.sendid == element.id ? ele.c : 0;
+                inArrayMapResult = inArrayMapResultitem;
+            } catch (error) {
+                // inArrayMapResult.push(0);
+            }
+        }
+        return inArrayMapResult;
+    });
+    console.log(areaJsonMapReuslt , 'area_json_map_resutl');
+    const sericechild =   {
+        'data' : areaJsonMapReuslt,
+        'name' : element.name,
+    }
+    series.push(sericechild);
+    // console.log(sericechild);
+});
+console.log(series , 'sercie -------------------------------------------------');
+
+// console.log(labales ,  '======================')
+series2 = [{
+    name: 'Tokyo',
+    data: [49.9]
+  }, {
+    name: 'New York',
+    data: [83.6, 78.8]
+  }];
+  console.log(series2);
 Highcharts.chart('container-lines', {
   chart: {
     type: 'column'
@@ -239,20 +327,7 @@ Highcharts.chart('container-lines', {
     text: 'Source: WorldClimate.com'
   },
   xAxis: {
-    categories: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec'
-    ],
+    categories: labales,
     crosshair: true
   },
   yAxis: {
@@ -275,23 +350,7 @@ Highcharts.chart('container-lines', {
       borderWidth: 0
     }
   },
-  series: [{
-    name: 'Tokyo',
-    data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-
-  }, {
-    name: 'New York',
-    data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
-
-  }, {
-    name: 'London',
-    data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
-
-  }, {
-    name: 'Berlin',
-    data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
-
-  }]
+  series: series,
 });
 }
 

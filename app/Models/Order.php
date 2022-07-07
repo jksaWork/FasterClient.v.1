@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Order extends Model
 {
     use HasFactory;
-
     public static function boot(){
         parent::boot();
         self::created(function ($order){
@@ -91,4 +92,6 @@ class Order extends Model
     {
         return $this->hasMany(OrderTracking::class, 'order_id', 'id');
     }
+
+
 }

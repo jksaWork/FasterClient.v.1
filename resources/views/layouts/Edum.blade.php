@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{asset('EDUM/vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" href="{{asset('EDUM/css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('EDUM/css/skin.css')}}">
+    <link rel="stylesheet" href="{{asset('EDUM/vendor/jquery-steps/css/jquery.steps.css')}}">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
     <style>

@@ -416,6 +416,13 @@ return [
     'peace' => 'القطع',
     'weight' => 'الوزن',
     // 'ثة' => 'الايميل ',
+    'no_chart_Data_right_now' => 'لايوجد بيانات للمخطط',
+    'returend_order' => 'استرجاع الطلبات',
+    'next' => 'التالي',
+    'my_orders' => 'طلباتي',
+    'shiping_to_shops' => 'شحن الطلابات الي المتاجر',
+    'deliverd_to_shops' => 'توصيل الطلابات الي المتاجر',
+    'iternation_shipping' => 'الشحن الدولي',
 
 
 ];

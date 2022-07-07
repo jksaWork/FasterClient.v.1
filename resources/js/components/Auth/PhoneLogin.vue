@@ -82,11 +82,9 @@
                 <a href="#"  @click.prevent=" confirem_code = false">
                     <span class="mt-5">{{trans.resend_code}}</span>
                 </a>
-
                 <div class="form-control-position">
                     <i class="fa-solid fa-message-smile"></i>
                 </div>
-
             </fieldset>
             </div>
             <div class="form-group">

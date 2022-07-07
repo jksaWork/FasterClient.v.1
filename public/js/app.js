@@ -41799,7 +41799,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "d-flex align-items-center justify-content-center py-2" },
+      { staticClass: "d-flex align-items-center justify-content-center pt-2" },
       [
         _c("img", {
           attrs: {

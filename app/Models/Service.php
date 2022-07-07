@@ -27,4 +27,5 @@ class Service extends Model
         'is_active' => 'boolean',
         'is_fill_sender' => 'boolean',
     ];
+
 }

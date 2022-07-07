@@ -1,6 +1,5 @@
 <div>
     <div class="card card-info">
-
         <div class="row px-3 py-2">
             <div class="col-md-3">
                 <div class="form-group">
@@ -37,7 +36,7 @@
                 <div class="form-group">
                     <label for="">{{__('translation.status')}}</label>
                     <select class="form-control" name="" wire:model='order_status' id="">
-                        @foreach (['completed' , 'returned'] as $item)
+                        @foreach ($OrderStatus as $item => $i)
                         <option value="{{$item}}">{{__('translation.' . $item)}}</option>
                         @endforeach
                     </select>
@@ -48,7 +47,7 @@
     <div class="card card-info">
         <div class="card-header">
             <div class="card-title">
-                {{__('translation.order-history')}}
+                {{__('translation.my_orders')}}
             </div>
         </div>
         <div class="card-content collapse show">

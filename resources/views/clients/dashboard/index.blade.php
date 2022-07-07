@@ -49,10 +49,25 @@
 <div class="row">
     <div class="col-xl-6 col-xxl-6 col-sm-12">
         <div class="card">
-            <figure class="highcharts-figure">
-                <div id="container">
+            @if(count($chart) > 0)
+                <figure class="highcharts-figure">
+                    <div id="container">
+                    </div>
+                </figure>
+            @else
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class='text-center'>
+                        <span class="mb-5">
+                            <svg style="width:40px;height:40px" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M5 5H7V11H5V5M10 5H8V11H10V5M5 19H7V13H5V19M10 13H8V19H10V17H15V15H10V13M2 21H4V3H2V21M20 3V7H13V5H11V11H13V9H20V15H18V13H16V19H18V17H20V21H22V3H20Z" />
+                            </svg>
+                        </span>
+                        <div> <h3>
+                            {{__('translation.no_chart_Data_right_now')}}
+                        </h3> </div>
+                    </div>
                 </div>
-            </figure>
+            @endif
         </div>
     </div>
     <div class="col-xl-6 col-xxl-6 col-sm-12">
@@ -244,11 +259,11 @@
     plotBackgroundColor: null,
     plotBorderWidth: null,
     plotShadow: false,
-    type: 'pie', 
+    type: 'pie',
     height:350,
   },
   title: {
-    text: "{{__('translation.order_status_pie_chart')}}" 
+    text: "{{__('translation.order_status_pie_chart')}}"
   },
   tooltip: {
     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -271,7 +286,7 @@
   series: [{
     name: 'Brands',
     colorByPoint: true,
-    data: data, 
+    data: data,
   }]
 });
 </script>
