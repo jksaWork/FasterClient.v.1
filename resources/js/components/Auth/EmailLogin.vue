@@ -55,6 +55,11 @@
                     </span>
                 </span>
             </button>
+            <div class="mt-2">
+                <a href="/register" class="mt-3 fs-19">{{
+                    trans.has_no_account
+                }}</a>
+            </div>
         </form>
     </div>
 </template>

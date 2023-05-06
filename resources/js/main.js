@@ -6,6 +6,7 @@ import vuetify from "vuetify";
 window.Vue = require("vue").default;
 require("./Firebase");
 import login from "./components/loginWithFirebase.vue";
+import Register from "./components/Auth/Register.vue";
 Vue.component("App", require("./components/loginWithFirebase.vue").default);
 
 Vue.use(vuetify);
@@ -14,4 +15,9 @@ const app2 = new Vue({
     // i18n,
     el: "#login-container",
     render: (h) => h(login),
+});
+
+const app3 = new Vue({
+    el: "#register-container",
+    render: (h) => h(Register),
 });

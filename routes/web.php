@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Session;
 // FacadesRoute::get('client-login' , [ClientAuthController::class, 'index']);
 Auth::routes(['register' => false]);
 FacadesRoute::get('login', fn () => view('auth.login'))->name('login');
+FacadesRoute::get('register', fn () => view('auth.register'))->name('login');
+
 
 // FacadesRoute::post()
 

@@ -9,7 +9,6 @@
             <img src='{{ asset('approved.svg') }}'  style='width:100%'/>
         </div>
         <h3 class='mt-5'> {{ __('translation.your_account_under_revions') }}</h3>
-
         </div>
     </div>
 </div>

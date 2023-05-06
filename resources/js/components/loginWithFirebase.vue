@@ -6,14 +6,18 @@
             <div
                 class="col-12 d-flex align-items-center justify-content-center"
             >
-                <Register />
-                <div class="col-md-4 col-10 box-shadow-2 p-0" v-if="false">
+                <!-- <Register /> -->
+                <div class="col-md-4 col-10 box-shadow-2 p-0">
                     <div class="card border-grey border-lighten-3 m-0">
                         <div class="card-content">
                             <div
                                 class="d-flex align-items-center justify-content-center pt-2"
                             >
-                                <img src="#" width="120" alt="notfond" />
+                                <img
+                                    src="https://app.fastersaudi.com/uploads/logos/logo.png"
+                                    style="width: 100px"
+                                    alt="branding logo"
+                                />
                             </div>
                             <div class="row px-2" style="margin: 0 2px">
                                 <div
@@ -49,7 +53,6 @@
                             </div>
                             <EmialLogin v-if="cureent_page == 'email'" />
                             <PhoneLogin v-else />
-                            <a> area you have account</a>
                         </div>
                     </div>
                 </div>
@@ -85,7 +88,11 @@ export default {
     created() {
         console.log(this.trans);
     },
-    methods: {},
+    methods: {
+        // ToogelFrom() {
+        //     alert("Hello");
+        // },
+    },
     component: {
         getActiveClass: () => (cureent_page == "phone_number" ? "active" : ""),
     },
