@@ -12,7 +12,6 @@
 	<meta property="og:description" content="Edumin - Bootstrap Admin Dashboard" />
 	<meta property="og:image" content="https://edumin.dexignlab.com/xhtml/social-image.png" />
 	<meta name="format-detection" content="telephone=no">
-
 	<!-- FAVICONS ICON -->
 	<link rel="icon" href="{{asset('uploads/logos/ZmlnAW2N0To93TQU4CZNqdPYorkDaVLgCsebsjLj.png')}}" type="image/x-icon" />
 	<link rel="shortcut icon" type="image/x-icon" href="{{asset('uploads/logos/ZmlnAW2N0To93TQU4CZNqdPYorkDaVLgCsebsjLj.png')}}" />

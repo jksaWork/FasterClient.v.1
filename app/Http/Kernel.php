@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ApprovedMidelware;
 use App\Http\Middleware\CheckApiKeyFromOuterResource;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -25,7 +26,7 @@ class Kernel extends HttpKernel
 
 
         // makamra middlewaire
-      ];
+    ];
 
     /**
      * The application's route middleware groups.
@@ -72,8 +73,8 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
-        'CheckApiKeyFromOuterResource'=> CheckApiKeyFromOuterResource::class,
-
+        'CheckApiKeyFromOuterResource' => CheckApiKeyFromOuterResource::class,
+        'approved' => ApprovedMidelware::class,
         'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
         'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
         'localeSessionRedirect'   => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,

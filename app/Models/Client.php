@@ -29,25 +29,26 @@ class Client extends Authenticatable
         'area_id',
         'in_accounts_order',
         'client_type',
-        'bank' ,
-        'activity' ,
-        'name_in_invoice' ,
-        'bank_account_owner' ,
-        'bank_account_number' ,
-        'iban_number' ,
+        'bank',
+        'activity',
+        'name_in_invoice',
+        'bank_account_owner',
+        'bank_account_number',
+        'iban_number',
         'civil_registry',
     ];
 
-    protected static function boot(){
+    protected static function boot()
+    {
         parent::boot();
-        Static::addGlobalScope(new ApprovedScope);
+        // Static::addGlobalScope(new ApprovedScope);
     }
     // protected $append = ['orignalPhone'];
     protected $hidden = [
         'password',
         'remember_token',
     ];
-     protected $appends = ['area_id' , 'orignal_phone'];
+    protected $appends = ['area_id', 'orignal_phone'];
 
     public function subArea()
     {
@@ -60,10 +61,11 @@ class Client extends Authenticatable
 
     public function getAreaIdAttribute($key)
     {
-       return  $this->subArea->area_id ?? null;
+        return  $this->subArea->area_id ?? null;
     }
 
-    public function ServicePrice(){
+    public function ServicePrice()
+    {
         return $this->hasMany(ClientServicePrice::class);
     }
 
@@ -71,30 +73,36 @@ class Client extends Authenticatable
     //     return $this->hasOne(Area::class);
     // }
 
-    public function ClientKeys(){
+    public function ClientKeys()
+    {
         return $this->hasOne(ClientsTokens::class);
     }
-    public function getOrignalPhoneAttribute(){
+    public function getOrignalPhoneAttribute()
+    {
         return substr($this->phone, 4);
     }
 
-    public function Orders(){
-        return $this->hasMany(Order::class)->where('is_collected' , 0);
+    public function Orders()
+    {
+        return $this->hasMany(Order::class)->where('is_collected', 0);
     }
 
     public function Files()
     {
         return $this->morphMany(clientsFile::class, 'fileable');
     }
-    public function getPendingCount(){
+    public function getPendingCount()
+    {
         return $this->Orders()->where('status', 'pending')->count();
     }
 
-    public function getInProgress(){
+    public function getInProgress()
+    {
         return $this->Orders()->where('status', 'inProgress')->count();
     }
 
-    public function getPickup(){
+    public function getPickup()
+    {
         return $this->Orders()->where('status', 'pickup')->count();
     }
 }

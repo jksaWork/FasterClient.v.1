@@ -1,7 +1,7 @@
 @extends('layouts.login-layout')
 @section('title', 'Login Page')
 @section('content')
-    <style>
+    {{-- <style>
         #particles-js {
             position: relative;
             /* background-color: g */
@@ -15,29 +15,30 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-    </style>
-    <div class="content-wrapper" style="background-image: linear-gradient(150deg, #143b64 , #155599 , #2262a5,#3993f4">
-        <div class="content-body " id="particles-js">
+    </style> --}}
+    <div class="content-wrapper" style="
+    background-image: url({{ asset('wave.png') }});
+    background-repeat:no-repeat;
+    background-size:cover;
+    ">
+        {{-- <div class="content-body " id="particles-js"> --}}
             <div class="" style="width: 100%">
                 <div class="">
                     <div id="login-container"></div>
                 </div>
             </div>
-        </div>
-    </div>
-    <script src="{{ asset('practiels/js/particles.js') }}"></script>
-    <script src="{{ asset('practiels/js/app.js') }}"></script>
-
+            </div>
+    {{-- TODO: Remove Poter .js --}}
     <!-- stats.js -->
     <script>
         window.lang = { ar:'' , en:''}
         window.lang.en = @json(__('en/translation', [] , '/'));
         window.lang.ar = @json(__('ar/translation', [] , '/'));
     </script>
-    <script src="{{ asset('practiels/js/lib/stats.js') }}"></script>
+    {{-- <script src="{{ asset('practiels/js/lib/stats.js') }}"></script> --}}
 
     <script src="{{ mix('js/app.js') }}"></script>
-    <script>
+    {{-- <script>
         var count_particles, stats, update;
         stats = new Stats;
         stats.setMode(0);
@@ -56,6 +57,6 @@
         };
         requestAnimationFrame(update);
         document.getElementById('fps').style.display = 'none';
-    </script>
+    </script> --}}
 
 @endsection

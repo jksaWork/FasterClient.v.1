@@ -54,7 +54,7 @@
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $order->by }}</td>
                                 <td>
-                                    <span class="badge {{$statusList[$order->status]}}">
+                                    <span class="badge {{-- $statusList[$order->status??1] --}}">
                                         {{$order->status}}
                                     </span>
                                 </td>

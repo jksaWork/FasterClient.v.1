@@ -14,6 +14,13 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
+                    <label for="">{{__('translation.code')}}</label>
+                    <input type="text" class="form-control" disabled name='fullname' value="{{ 'GIZ'.auth()->user()->id }}"
+                        id="" aria-describedby="helpId" placeholder="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
                     <label for="">{{__('translation.address')}}</label>
                     <input type="text" class="form-control"  disabled name='fullname' value="{{auth()->user()->address}}"
                         id="" aria-describedby="helpId" placeholder="">
@@ -64,7 +71,7 @@
             </div>
         </div>
         <hr>
-        <div class="row">
+        {{-- <div class="row">
             <h4>
                 {{__('translation.invoice_and_shpiing')}}
             </h4>
@@ -117,23 +124,12 @@
                         >
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     @foreach ($errors->all() as $error)
     <span class="text-danger">
         {{ $error }}
     </span>
-    <br/>
                 @endforeach
-    <div class="card-footer">
-        <div class="d-flex justify-content-between">
-            <a class="btn btn-light" href="#" onclick="history.back()">
-                {{__('translation.back')}}
-            </a>
-            <button class="btn btn-info">
-                {{__('translation.edit')}}
-            </button>
-        </div>
-    </div>
    </form>
 </div>

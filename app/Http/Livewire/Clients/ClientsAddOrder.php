@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use phpDocumentor\Reflection\DocBlock\Serializer;
+// use DB;
 
 class ClientsAddOrder extends Component
 {
@@ -30,17 +31,25 @@ class ClientsAddOrder extends Component
         $receiver_area_id, $receiver_sub_area_id,
         $number_of_pieces,
         $order_value,
-        $order_weight ,
+        $order_weight,
         $receiver_address, $police_file, $order_fees, $is_payment_on_delivery, $payment_method = 'balance', $status;
     public $SenderSubArea, $ResevierSubArea, $SendingArea, $ResevingArea;
 
     public function mount($id)
     {
         // dd($id);
-        try{
+        try {
             $this->service_id = decrypt($id);
-            $this->SendingArea = Area::withCount('subAreas')->get();
-            $this->ResevingArea = Area::withCount('subAreas')->get();
+            // dd($this->service_id);
+            $sending_ids =  DB::table('area_services')
+                ->select('service_id', 'area_id')->where(['service_id' => $this->service_id, 'is_sending' => 1])
+                ->get()->pluck('area_id')->toArray();
+
+            $reseving_ids =  DB::table('area_services')
+                ->select('service_id', 'area_id')->where(['service_id' => $this->service_id, 'is_resiving' => 1])
+                ->get()->pluck('area_id')->toArray();
+            $this->SendingArea = Area::withCount('subAreas')->find($sending_ids);
+            $this->ResevingArea = Area::withCount('subAreas')->find($reseving_ids);
             $this->ResevierSubArea = SubArea::get();
             $this->SenderSubArea = SubArea::get();
             $this->client_id = auth()->user()->id;
@@ -49,8 +58,9 @@ class ClientsAddOrder extends Component
             $this->sender_area_id =  auth()->user()->area_id;
             $this->sender_sub_area_id = auth()->user()->sub_area_id;
             $this->sender_address = auth()->user()->address;
-        }catch(Exception $e){
-            throw abort(404);
+        } catch (Exception $e) {
+            return $e;
+            // throw abort(404);
         }
     }
     public function store()
@@ -113,9 +123,9 @@ class ClientsAddOrder extends Component
                 } else {
                     $this->representative_id = null;
                 }
-                    $validatedData['client_id'] = auth()->user()->id;
-                    $validatedData['representative_id'] = null;
-                    $validatedData['status'] = 'pending';
+                $validatedData['client_id'] = auth()->user()->id;
+                $validatedData['representative_id'] = null;
+                $validatedData['status'] = 'pending';
 
                 $order_id = Order::insertGetId($validatedData);
                 // insert order tracking
@@ -171,7 +181,6 @@ class ClientsAddOrder extends Component
             'ResevingArea' => $this->ResevingArea,
             'SendingArea' => $this->SendingArea,
         ])
-        ->layout('layouts.Edum')
-        ;
+            ->layout('layouts.Edum');
     }
 }

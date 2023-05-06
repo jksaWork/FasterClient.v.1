@@ -49,9 +49,9 @@
                 style="background: #143b64 !important; color: white"
             >
                 <span class="">
-                <i class="ft-unlock"></i>
-                <span class="mx-2">
-                        {{trans.login}}
+                    <i class="ft-unlock"></i>
+                    <span class="mx-2">
+                        {{ trans.login }}
                     </span>
                 </span>
             </button>
@@ -71,11 +71,11 @@ export default {
                 // access_token: '',
             },
             error: "",
-                trans: window.lang[window.localStorage.getItem('local') ?? 'ar'],
+            trans: window.lang[window.localStorage.getItem("local") ?? "ar"],
             // scrf: getCrf(),
         };
     },
-    created(){
+    created() {
         console.log(this.trans.login);
     },
     computed: {

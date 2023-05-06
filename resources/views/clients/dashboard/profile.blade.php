@@ -19,7 +19,8 @@
                     <div class="profile-photo">
                         <img src="{{asset('uploads/images/8CYjp3C7MNIAjZ2Zt0bOSO4hTOYyObHh7LrngwnO.svg')}}" width="70" height="70" class="img-fluid rounded-circle" alt="">
                     </div>
-                    <h3 class="mt-4 mb-1">{{ auth()->user()->fullname}}</h3>
+                    <h3 class="mt-4 ">{{ auth()->user()->fullname}}</h3>
+                    <h6 class=" mb-1">{{  "GIZ-" .auth()->user()->id}}</h6>
                 </div>
             </div>
 
