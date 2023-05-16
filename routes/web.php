@@ -20,7 +20,7 @@ FacadesRoute::get('register', fn () => view('auth.register'))->name('login');
 
 
 // FacadesRoute::post()
-
+FacadesRoute::get('caputre', fn () => view('caputre'));
 FacadesRoute::get('locale/{locale}', function ($locale) {
 
     Session::put('locale', $locale);

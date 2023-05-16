@@ -38,6 +38,7 @@ Route::prefix('global')->group(function () {
 Route::get(
     'sendmail',
     function () {
+        // dd('Hello');
         $validotr  = validator(request()->all(), [
             'email' => 'required',
             'title' => 'required',
@@ -54,6 +55,8 @@ Route::get(
         //         ->subject($data["content"]);
         // });
         Mail::to(request()->email)->send(new TestMail($data));
+        // return  redirect()->back();
+        return "Thank You To Mail us ";
     }
 );
 // Client Apis
