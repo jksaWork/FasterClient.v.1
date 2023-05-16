@@ -7,10 +7,12 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientsTokensController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RepresentativeController;
+use App\Mail\TestMail;
 use App\Models\Representative;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +29,33 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 // gloab route with out auth
-Route::prefix('global')->group(function(){
+Route::prefix('global')->group(function () {
     Route::get('getAllAreas', [App\Http\Controllers\ClientController::class, 'getAllAreas']);
     Route::post('getSubAreaByAreaId', [App\Http\Controllers\ClientController::class, 'getSubAreaByAreaId']);
-    Route::get('getOrderById/{id}', [OrderController::class , 'getOrderById'])->middleware('auth:sanctum');
+    Route::get('getOrderById/{id}', [OrderController::class, 'getOrderById'])->middleware('auth:sanctum');
 });
 
+Route::get(
+    'sendmail',
+    function () {
+        $validotr  = validator(request()->all(), [
+            'email' => 'required',
+            'title' => 'required',
+            'phone' => 'required',
+            'content' => 'required',
+            'name' => 'required'
+        ]);
+        if ($validotr->fails()) return $validotr->errors();
+
+        $data = request()->all();
+        $formcontent = "From:" . request()->name . " \n Message:" . request()->content;
+        // Mail::send($data, function ($message) use ($data) {
+        //     $message->to($data["email"], $data["name"])
+        //         ->subject($data["content"]);
+        // });
+        Mail::to(request()->email)->send(new TestMail($data));
+    }
+);
 // Client Apis
 Route::group(['prefix' => 'client'], function () {
     //Area Static
@@ -46,11 +69,11 @@ Route::group(['prefix' => 'client'], function () {
 
     Route::post('getSubAreaByAreaId', [App\Http\Controllers\ClientController::class, 'getSubAreaByAreaId']);
 
-        //get all services
+    //get all services
     //protected routes
     Route::group(["middleware" => "auth:sanctum"], function () {
         //logout route
-        Route::get('AreaStatic', [ClientController::class , 'AreaStatic']);
+        Route::get('AreaStatic', [ClientController::class, 'AreaStatic']);
         Route::get('getAllAreas', [App\Http\Controllers\ClientController::class, 'getAllAreas']);
 
         Route::post('clientLogout', [App\Http\Controllers\Api\AuthController::class, 'clientLogout']);
@@ -71,9 +94,9 @@ Route::group(['prefix' => 'client'], function () {
         //get all Sub Areas ----------------------------------------------------------------
         Route::get('getallSubArea', [App\Http\Controllers\ClientController::class, 'getallSubArea']);
     });
-     // last modification add is sending is resiving route  --------------------------
+    // last modification add is sending is resiving route  --------------------------
     // note appent route to auth group  ----------------------------
-    Route::post('getAllAreasByServiceId' , [App\Http\Controllers\ClientController::class, 'getAllAreasByServiceId']);
+    Route::post('getAllAreasByServiceId', [App\Http\Controllers\ClientController::class, 'getAllAreasByServiceId']);
 });
 
 
@@ -82,7 +105,7 @@ Route::group(['prefix' => 'representative'], function () {
     //public routes
     //Login representative
     Route::post('representativeLogin', [App\Http\Controllers\Api\AuthController::class, 'representativeLogin']);
-    Route::post('representativeRegister' , [AuthController::class , 'representativeRegister']);
+    Route::post('representativeRegister', [AuthController::class, 'representativeRegister']);
 
     //protected routes
     Route::group(["middleware" => "auth:sanctum"], function () {
@@ -99,7 +122,7 @@ Route::group(['prefix' => 'representative'], function () {
         //transfer order
         Route::post('transferOrder', [App\Http\Controllers\RepresentativeController::class, 'transferOrder']);
         // transferMultiOrders Transfeerr Multi Orders       --------------------
-        Route::post('transferMultiOrders' , [RepresentativeController::class , 'transferMultiOrders']);
+        Route::post('transferMultiOrders', [RepresentativeController::class, 'transferMultiOrders']);
         //get representative
 
         Route::post('getRepresentative', [App\Http\Controllers\RepresentativeController::class, 'getRepresentative']);
@@ -134,24 +157,21 @@ Route::group(['prefix' => 'representative'], function () {
         //getRepresentativeCompanyDeserves
         Route::get('getRepresentativeCompanyDeserves', [App\Http\Controllers\RepresentativeController::class, 'getRepresentativeCompanyDeserves']);
         // transform Orders From Rep To Other Rep
-        Route::post('ScanBarCode', [RepresentativeController::class , 'ScanBarCode']);
-        Route::get('AreaStatic' , [RepresentativeController::class, 'AreaStatic']);
+        Route::post('ScanBarCode', [RepresentativeController::class, 'ScanBarCode']);
+        Route::get('AreaStatic', [RepresentativeController::class, 'AreaStatic']);
     });
-
 });
 
 
-Route::get('whatsService/getNewMessages' , [WhatServicesControll::class , 'getNewMessages']);
-Route::post('whatsService/SetMessageSent', [WhatServicesControll::class , 'SetMessageSent']);
+Route::get('whatsService/getNewMessages', [WhatServicesControll::class, 'getNewMessages']);
+Route::post('whatsService/SetMessageSent', [WhatServicesControll::class, 'SetMessageSent']);
 
 
-Route::post('generateApiToken' , [ClientsTokensController::class, 'create'])->middleware('auth:sanctum');
-Route::post('getUserWithToken' , [ClientsTokensController::class , 'show'])->middleware('CheckApiKeyFromOuterResource');
+Route::post('generateApiToken', [ClientsTokensController::class, 'create'])->middleware('auth:sanctum');
+Route::post('getUserWithToken', [ClientsTokensController::class, 'show'])->middleware('CheckApiKeyFromOuterResource');
 
 
-Route::post('addOrdersWithApiKey', [ClientController::class , 'addOrderWithApiKey']);
+Route::post('addOrdersWithApiKey', [ClientController::class, 'addOrderWithApiKey']);
 
 // Route::post('client-login' , [AuthWithToken::class, 'ClientLogin']);
-Route::get('TestLogin/{type?}' , [AuthController::class , 'TestLogin']);
-
-
+Route::get('TestLogin/{type?}', [AuthController::class, 'TestLogin']);
