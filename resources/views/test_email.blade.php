@@ -6,6 +6,8 @@
 <strong>Email: </strong>{{ $data['email'] }} <br>
 <strong>Phone: </strong>{{ $data['phone'] ?? '' }} <br>
 <strong>Subject: </strong>{{ $data['content'] ?? '' }} <br>
-{{-- <strong>Message: </strong>{{ $data->user_query }} <br><br> --}}
+<strong>investment volume: </strong>{{ $data['investment_volume'] ?? '' }} <br>
+
+investment_volume{{-- <strong>Message: </strong>{{ $data->user_query }} <br><br> --}}
 
 Thank you
